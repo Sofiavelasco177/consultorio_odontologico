@@ -31,7 +31,7 @@
                 <li><a href="#" data-section="patients"><img src="patients-icon.png" alt="" class="nav-icon"> Pacientes</a></li>
                 <li><a href="#" data-section="appointments"><img src="appointments-icon.png" alt="" class="nav-icon"> Citas</a></li>
                 <li><a href="#" data-section="full-calendar"><img src="calendar-icon.png" alt="" class="nav-icon"> Calendario Completo</a></li>
-                <li><a href="#" data-section="observations"><img src="observations-icon.png" alt="" class="nav-icon">Formato</a></li>
+                <li><a href="#" data-section="observations"><img src="appointments-icon.png" alt="" class="nav-icon">Formato</a></li>
                 
             </ul>
         </nav>
