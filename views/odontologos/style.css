@@ -1,129 +1,456 @@
 body {
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Pacifico', cursive;
     margin: 0;
     padding: 0;
     background-color: #f4f7f6;
     color: #333;
+    display: flex;
+    height: 100vh;
+    overflow: hidden; /* Prevent body scroll when modal is not shown */
 }
 
-.main-header {
-    background: #020024;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 46%, rgba(7, 35, 41, 1) 93%);
-    color: white;
-    padding: 15px 20px;
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.navbar {
+    width: 250px;
+    background-color:#2A7B9B; /* Dark blue-grey */
+    color: #ecf0f1; /* Light grey text */
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    box-sizing: border-box;
+}
+
+.navbar-header {
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #34495e; /* Slightly lighter border */
 }
 
-.main-header h1 {
+.navbar-header h2 {
     margin: 0;
     font-size: 1.8em;
+    color: #1abc9c; /* Teal color */
 }
 
-main {
-    padding: 20px;
+.navbar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
-section {
-    background: #cffafa;
-    background: linear-gradient(0deg, rgba(207, 250, 250, 1) 0%, rgba(245, 240, 230, 1) 100%);
-    margin-bottom: 20px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-section h2 {
-    color: #0056b3;
-    margin-top: 0;
-    border-bottom: 2px solid #e0e0e0;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.table-container {
-    overflow-x: auto; /* Para tablas anchas en pantallas pequeñas */
-}
-
-#appointments-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-#appointments-table th,
-#appointments-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-    vertical-align: top;
-}
-
-#appointments-table th {
-    background-color: #e9ecef;
-    color: #495057;
-    font-weight: bold;
-}
-
-#appointments-table tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-#appointments-table tbody tr:hover {
-    background-color: #e2e6ea;
-}
-
-#appointments-table textarea {
-    width: 95%;
-    min-height: 60px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 5px;
-    font-family: Arial, sans-serif;
-    font-size: 0.9em;
-    resize: vertical;
-}
-
-#available-times-display .date-group {
-    margin-bottom: 15px;
-}
-
-#available-times-display h3 {
-    color: #007bff;
-    font-size: 1.1em;
-    margin-bottom: 5px;
-}
-
-#available-times-display p {
-    margin: 0 0 5px 0;
-    padding-left: 10px;
-}
-
-#available-times-display span.time-slot {
-    display: inline-block;
-    background-color: #e0f7fa;
-    color: #00796b;
-    padding: 3px 8px;
-    border-radius: 4px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    font-size: 0.9em;
-}
-.btn {
-    background: #020024;
-background: linear-gradient(90deg, rgba(2, 0, 36, 1) 16%, rgba(9, 9, 121, 1) 55%, rgba(0, 212, 255, 1) 82%);
-    color: white;
-    padding: 10px 10px;
-    border: none;
-    border-radius: 4%;
-    cursor: pointer;
-    font-size: 16px;
-    width: 15%;
-    transition: background-color 0.3s ease;
+.navbar ul li a {
     display: flex;
-    justify-content: left;
-    align-items: left;
-    margin: 0 auto;
+    align-items: center;
+    color: #ecf0f1;
+    text-decoration: none;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1em;
 }
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    filter: invert(90%) sepia(15%) saturate(100%) hue-rotate(180deg) brightness(100%) contrast(90%); /* Makes icons light grey */
+}
+
+
+.navbar ul li a:hover, .navbar ul li a.active {
+    background-color: #1abc9c; /* Teal */
+    color: #fff; /* White text */
+}
+
+.navbar ul li a.active .nav-icon, .navbar ul li a:hover .nav-icon {
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(0deg) brightness(200%) contrast(100%); /* White icons */
+}
+
+
+.content {
+    flex-grow: 1;
+    padding: 25px;
+    background-color: #fff;
+    overflow-y: auto; /* Allow scrolling for content area */
+    height: 100vh;
+    box-sizing: border-box;
+    position: relative; /* Added for potential absolute positioning inside if needed */
+}
+
+.page-content {
+    display: none; /* Hidden by default */
+    animation: fadeIn 0.5s ease-out; /* Simple fade-in animation */
+}
+
+.page-content.active {
+    display: block; /* Show active page */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.content-header {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.content-header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #2c3e50; /* Dark blue-grey */
+}
+
+#calendar {
+    max-width: 100%;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+/* FullCalendar custom styles */
+.fc-event {
+    cursor: pointer;
+    border-radius: 4px !important; /* Ensure border-radius is applied */
+    padding: 4px 6px !important; /* Add some padding inside event */
+    font-size: 0.85em;
+}
+
+.fc-event-main-custom {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal; /* Allow wrapping for better display */
+}
+.fc-event-main-custom strong {
+    display: block;
+    color: #fff;
+}
+.fc-event-main-custom em {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.9em;
+}
+
+.fc .fc-toolbar-title {
+    font-size: 1.5em;
+    color: #2c3e50;
+}
+
+.fc .fc-button {
+    background-color: #1abc9c; /* Teal */
+    border-color: #1abc9c;
+    color: #fff;
+    text-transform: capitalize;
+    box-shadow: none !important;
+    transition: background-color 0.3s ease;
+}
+
+.fc .fc-button:hover {
+    background-color: #16a085; /* Darker Teal */
+}
+
+.fc .fc-button-primary:not(:disabled).fc-button-active, .fc .fc-button-primary:not(:disabled):active {
+    background-color: #16a085; /* Darker Teal */
+    border-color: #16a085;
+}
+
+.fc-daygrid-day-number, .fc-col-header-cell-cushion {
+    color: #555;
+}
+
+.fc-timegrid-slot-label { /* Style for time labels on the side */
+    color: #555;
+}
+
+.fc-timegrid-slot.fc-timegrid-slot-lane { /* Style for the time slots background */
+    border-bottom: 1px dotted #e0e0e0;
+}
+.fc-timegrid-slot.fc-timegrid-slot-lane:hover {
+    background-color: #f0f8ff; /* Light blue on hover for empty slots */
+}
+
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5); /* Dim background */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: #333;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    color: #1abc9c; /* Teal */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 12px;
+    color: #555;
+}
+.modal-content p strong {
+    color: #2c3e50; /* Dark blue-grey */
+}
+
+/* Patients Section Styles */
+#patients-content {
+    display: flex;
+    flex-direction: column;
+    gap: 25px; /* Spacing between elements */
+}
+
+#patientListTableContainer {
+    max-height: 300px; /* Adjust as needed for desired table height */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.patients-table {
+    width: 100%;
+    border-collapse: collapse; /* Cleaner borders */
+}
+
+.patients-table th, .patients-table td {
+    border-bottom: 1px solid #e0e0e0; /* Lighter border for rows */
+    padding: 10px 14px; /* More padding */
+    text-align: left;
+    font-size: 0.9em; /* Slightly smaller font for table */
+}
+
+.patients-table th {
+    background-color: #f7f9fa; /* Very light grey for headers */
+    color: #333;
+    position: sticky; 
+    top: 0; 
+    z-index: 1; /* Ensure header is above scrolling content */
+    border-top: none; /* Remove top border for first header row if container has border */
+    border-bottom-width: 2px; /* Stronger bottom border for header */
+}
+.patients-table td:first-child, .patients-table th:first-child {
+    padding-left: 18px;
+}
+.patients-table td:last-child, .patients-table th:last-child {
+    padding-right: 18px;
+}
+
+
+.patients-table tbody tr:nth-child(even) {
+    background-color: #fdfdfd; 
+}
+
+.patients-table tbody tr:hover {
+    background-color: #eef8ff; /* Light blue highlight on hover */
+}
+
+#earningsSummary {
+    padding: 18px 20px;
+    background-color: #e9f7fd; 
+    border-left: 6px solid #1abc9c; /* Teal accent */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#earningsSummary h3 {
+    margin: 0;
+    color: #2c3e50; /* Dark blue-grey */
+    font-size: 1.3em; /* Slightly larger */
+    font-weight: 600;
+}
+
+#earningsChartContainer {
+    width: 100%;
+    height: 380px; 
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+}
+
+#earningsChart {
+    display: block;
+    width: 100% !important; 
+    height: 100% !important;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    .navbar {
+        width: 100%;
+        height: auto;
+        flex-direction: row; 
+        justify-content: space-around; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .navbar-header {
+        display: none; 
+    }
+    .navbar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .navbar ul li a {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+    .nav-icon {
+        margin-right: 5px;
+    }
+    .content {
+        height: calc(100vh - auto); 
+    }
+    .fc .fc-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .fc .fc-toolbar-chunk {
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-around;
+    }
+    .fc .fc-toolbar-title {
+        text-align: center;
+        font-size: 1.3em;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+    }
+
+    #patientListTableContainer {
+        max-height: 250px; /* Adjust for smaller screens */
+    }
+    .patients-table th, .patients-table td {
+        padding: 8px 10px;
+        font-size: 0.85em;
+    }
+    #earningsChartContainer {
+        height: 300px; /* Adjust chart height for smaller screens */
+    }
+    #earningsSummary h3 {
+        font-size: 1.15em;
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.form-card {
+    max-width: 700px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+  }
+  
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, #0d6efd, #4e89ff);
+  }
+  
+  .card-header {
+    padding: 1.5rem;
+  }
+  
+  .card-body {
+    padding: 2rem;
+  }
+  
+  label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  textarea, input {
+    border-radius: 10px !important;
+  }
+  
+  .btn-primary {
+    background-color: #4e89ff;
+    border: none;
+    padding: 0.75rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-primary:hover {
+    background-color: #306dd1;
+  }

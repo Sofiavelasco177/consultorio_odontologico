@@ -1,9 +1,9 @@
 <?php
 class Database {
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $dbname = sistema_odontologico;
+    private $host = "localhost";
+    private $user = "root";
+    private $pass = "";
+    private $dbname = "consultorio_odontologico";
 
     private $dbh;
     private $stmt;
