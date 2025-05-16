@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /consultorio_odontologico/
+    
+    # Si el archivo o directorio existe, úsalo directamente
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    
+    # Redirigir todas las solicitudes a index.php
+    RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+</IfModule

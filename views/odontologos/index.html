@@ -1,0 +1,51 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Odontólogo</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {
+        "config": "./config.js"
+      }
+    }
+    </script>
+</head>
+<body>
+    <header class="main-header">
+        <h1>Tu Agenda</h1>
+    </header>
+
+    <main>
+        <section id="appointments-section">
+            <h2>Citas Programadas</h2>
+            <div class="table-container">
+                <table id="appointments-table">
+                    <thead>
+                        <tr>
+                            <th>Paciente</th>
+                            <th>Fecha</th>
+                            <th>Hora</th>
+                            <th>Observaciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appointments-tbody">
+                        <!-- Las filas de citas se insertarán aquí por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn">Subir Observaciones</button>
+        </section>
+
+        <section id="available-times-section">
+            <h2>Tiempos Disponibles</h2>
+            <div id="available-times-display">
+                <!-- Los tiempos disponibles se insertarán aquí por JavaScript -->
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
