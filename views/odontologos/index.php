@@ -1,37 +1,5 @@
 
 
-
-
-
-
-<?php
-include("Database.php");
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nombre = $_POST['nombrePaciente'];
-    $fecha = $_POST['fecha'];
-    $motivo = $_POST['motivoConsulta'];
-    $observaciones = $_POST['observaciones'];
-    $tratamiento = $_POST['tratamiento'];
-    $profesional = $_POST['profesional'];
-
-    $sql = "INSERT INTO observaciones (nombre_paciente, fecha, motivo_consulta, observaciones, tratamiento, profesional)
-            VALUES (?, ?, ?, ?, ?, ?)";
-
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("ssssss", $nombre, $fecha, $motivo, $observaciones, $tratamiento, $profesional);
-
-    if ($stmt->execute()) {
-        echo "<script>alert('Observación registrada con éxito'); window.location.href='formulario.html';</script>";
-    } else {
-        echo "Error: " . $conexion->error;
-    }
-
-    $stmt->close();
-    $conexion->close();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
