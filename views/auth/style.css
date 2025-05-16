@@ -1,7 +1,8 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #020024;
-    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 51%, rgba(146, 235, 252, 1) 100%);
+    font-family: "Trebuchet MS", Verdana, sans-serif;
+    background-image: url('fondo\ login.webp');
+    background-size: cover;
+    background-position: center;
     margin: 0;
     padding: 0;
     display: flex;
@@ -11,13 +12,16 @@ body {
     min-height: 100vh;
     color: #e0e0e0; 
 }
-
+.logo {
+    width: 400px;
+    height: auto;
+}
 .logo-container {
     margin-right: 15px; 
 }
 
 .logo-container img {
-    width: 60px; 
+    width: 100px; 
     height: auto;
 }
 
@@ -35,15 +39,16 @@ body {
 }
 
 .form-container {
-    background-color: #172A45; 
-    padding: 30px;
+    background: #020024;
+    background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+    padding: 45px;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); 
     text-align: center; 
 }
 
 h2 {
-    color: #58a6ff; 
+    color: #f0f3f8; 
     margin-top: 0;
     margin-bottom: 0;
     font-size: 1.75em; 
@@ -58,7 +63,7 @@ h2 {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #c0c0c0; 
+    color: #f7eeee; 
 }
 
 .form-group input,
@@ -80,15 +85,15 @@ h2 {
 
 .form-group input:focus,
 .form-group select:focus {
-    background: #833AB4;
-    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 58%, rgba(250, 100, 100, 1) 100%, rgba(240, 232, 221, 1) 100%); 
+    background: #2A7B9B;
+    background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 100%, rgba(247, 245, 228, 1) 100%);
     outline: none;
     box-shadow: 0 0 0 0.2rem    rgba(88, 166, 255, 0.35); 
 }
 
 .btn {
-    background: #833AB4;
-    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 58%, rgba(250, 100, 100, 1) 100%, rgba(240, 232, 221, 1) 100%);
+    background: #2A7B9B;
+    background: linear-gradient(90deg, rgba(42, 123, 155, 1) 0%, rgba(87, 199, 133, 1) 100%, rgba(247, 245, 228, 1) 100%);
     color: white;
     padding: 10px 10px;
     border: none;

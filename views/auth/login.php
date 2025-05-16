@@ -1,18 +1,45 @@
+<?php
+session_start();
 
 
+if (isset($_SESSION['nombre']))
+{
+    header('Location: ../../controlador/validar.php');
+}
 
+if (isset($_POST['btningresar'])) 
+{
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "hotel";
 
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
+    if (!$conn) {
+        die("Error de conexión: " . mysqli_connect_error());
+    }
 
+    $usuario = $_POST['txtusuario'];
+    $password = $_POST['txtpassword'];
 
+    
+    $query = mysqli_query($conn, "SELECT * FROM rol WHERE nombre = '".$nombre."' and contraseña = '".$password."'");
+    $nr = mysqli_num_rows($query);
 
-
-
-
-
-
-
-
+    if (!isset($_SESSION['nombre']))
+    {
+    if ($nr == 1) {
+        $_SESSION['nombre'] = $usuario;
+        header("Location: ../../controlador/validar.php");
+        exit();
+    } else if ($nr == 0)
+    {
+        echo "<script>alert('Usuario o contraseña incorrectos'); window.location='login.php';</script>";
+    }
+}
+}
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -32,9 +59,9 @@
         <div class="form-container">
             <div class="form-header">
                 <div class="logo-container">
-                    <img src="OIP-removebg-preview.png" alt="logo">
+                    <img src="image.png" alt="logo" class="logo">
                 </div>
-                <h2>Inicia Sesión</h2>
+                <h2>BIENVENIDO A DENTAL</h2>
             </div>
             <form id="loginForm">
                 <div class="form-group">

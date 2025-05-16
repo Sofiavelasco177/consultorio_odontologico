@@ -1,55 +1,128 @@
 <?php
- require_once 'views/templates/header.php';
-  ?>
+session_start();
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card shadow">
-                <div class="card-header bg-primary text-white text-center">
-                    <h4>Registrarse</h4>
+
+if (isset($_SESSION['nombre']))
+{
+    header('Location: ../../controlador/validar.php');
+}
+
+if (isset($_POST['btningresar'])) 
+{
+    $dbhost = "localhost";
+    $dbuser = "root";
+    $dbpass = "";
+    $dbname = "hotel";
+
+    $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
+
+    if (!$conn) {
+        die("Error de conexión: " . mysqli_connect_error());
+    }
+
+    $usuario = $_POST['txtusuario'];
+    $password = $_POST['txtpassword'];
+
+    
+    $query = mysqli_query($conn, "SELECT * FROM rol WHERE nombre = '".$nombre."' and contraseña = '".$password."'");
+    $nr = mysqli_num_rows($query);
+
+    if (!isset($_SESSION['nombre']))
+    {
+    if ($nr == 1) {
+        $_SESSION['nombre'] = $usuario;
+        header("Location: ../../controlador/validar.php");
+        exit();
+    } else if ($nr == 0)
+    {
+        echo "<script>alert('Usuario o contraseña incorrectos'); window.location='login.php';</script>";
+    }
+}
+}
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta de Paciente - Clínica Dental</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="importmap">
+    {
+      "imports": {}
+    }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="form-header">
+                <div class="logo-container">
+                    <img src="image.png" alt="logo" class="logo">
                 </div>
-                <div class="card-body">
-                    <form action="<?php echo BASE_URL; ?>auth/register" method="POST">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Nombre de Usuario</label>
-                            <input type="text" class="form-control <?php echo (!empty($data['username_err'])) ? 'is-invalid' : ''; ?>" 
-                                   id="username" name="username" value="<?php echo $data['username']; ?>">
-                            <div class="invalid-feedback"><?php echo $data['username_err']; ?></div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Correo Electrónico</label>
-                            <input type="email" class="form-control <?php echo (!empty($data['email_err'])) ? 'is-invalid' : ''; ?>" 
-                                   id="email" name="email" value="<?php echo $data['email']; ?>">
-                            <div class="invalid-feedback"><?php echo $data['email_err']; ?></div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control <?php echo (!empty($data['password_err'])) ? 'is-invalid' : ''; ?>" 
-                                   id="password" name="password">
-                            <div class="invalid-feedback"><?php echo $data['password_err']; ?></div>
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Confirmar Contraseña</label>
-                            <input type="password" class="form-control <?php echo (!empty($data['confirm_password_err'])) ? 'is-invalid' : ''; ?>" 
-                                   id="confirm_password" name="confirm_password">
-                            <div class="invalid-feedback"><?php echo $data['confirm_password_err']; ?></div>
-                        </div>
-                        
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-primary">Registrarse</button>
-                        </div>
-                    </form>
+                <h2>Crear tu Cuenta </h2>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label for="cedula">Cédula:</label>
+                    <input type="text" id="cedula" name="cedula" required placeholder="Ej: 123456789">
                 </div>
-                <div class="card-footer text-center">
-                    <p class="mb-0">¿Ya tiene una cuenta? <a href="<?php echo BASE_URL; ?>auth/login">Inicie sesión aquí</a></p>
+
+                <div class="form-group">
+                    <label for="nombre">Nombre:</label>
+                    <input type="text" id="nombre" name="nombre" required placeholder="Su nombre">
+                </div>
+
+                <div class="form-group">
+                    <label for="apellido">Apellido:</label>
+                    <input type="text" id="apellido" name="apellido" required placeholder="Su apellido">
+                </div>
+
+                <div class="form-group">
+                    <label for="fecha_nacimiento">Fecha de Nacimiento:</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="genero">Género:</label>
+                    <select id="genero" name="genero" required>
+                        <option value="" disabled selected>Seleccione...</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Femenino">Femenino</option>
+                        <option value="Otro">Otro</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="direccion">Dirección:</label>
+                    <input type="text" id="direccion" name="direccion" required placeholder="Su dirección completa">
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Teléfono:</label>
+                    <input type="tel" id="telefono" name="telefono" required placeholder="Ej: 0991234567">
+                </div>
+
+                <div class="form-group">
+                    <label for="correo">Correo Electrónico:</label>
+                    <input type="email" id="correo" name="correo" required placeholder="suemail@ejemplo.com">
                 </div>
             </div>
+                <div class="form-group">
+                    <label for="regPassword">Contraseña:</label>
+                    <input type="password" id="regPassword" name="regPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirmar Contraseña:</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn">Registrar</button>
+            </form>
+            <p class="login-link">¿Ya tienes una cuenta? <a href="index.html">Iniciar sesión</a></p>
+            <div id="registerMessage" class="message"></div>
         </div>
     </div>
-</div>
-
-<?php require_once 'views/templates/footer.php'; ?>
+    <script src="registro.js" type="module"></script>
+</body>
+</html>
