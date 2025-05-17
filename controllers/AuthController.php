@@ -86,6 +86,7 @@ class AuthController {
             $data = [
                 'username' => trim($_POST['username']),
                 'email' => trim($_POST['email']),
+                
                 'password' => trim($_POST['password']),
                 'confirm_password' => trim($_POST['confirm_password']),
                 'role_id' => 4, // Rol de paciente por defecto

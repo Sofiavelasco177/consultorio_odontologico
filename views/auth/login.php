@@ -4,7 +4,7 @@ session_start();
 
 if (isset($_SESSION['nombre']))
 {
-    header('Location: ../../controlador/validar.php');
+    header('Location: ../../controllers/AuthController.php');
 }
 
 if (isset($_POST['btningresar'])) 
@@ -12,7 +12,7 @@ if (isset($_POST['btningresar']))
     $dbhost = "localhost";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "hotel";
+    $dbname = "consultorio_odontologico";
 
     $conn = mysqli_connect($dbhost, $dbuser, $dbpass, $dbname);
 
@@ -31,7 +31,7 @@ if (isset($_POST['btningresar']))
     {
     if ($nr == 1) {
         $_SESSION['nombre'] = $usuario;
-        header("Location: ../../controlador/validar.php");
+        header("Location: ../../controllers/AuthController.php");
         exit();
     } else if ($nr == 0)
     {
